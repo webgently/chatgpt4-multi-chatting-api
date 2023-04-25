@@ -1,5 +1,5 @@
 const API = (router: any) => {
-    // APIs for Auth
+  // APIs for Auth
 };
 
 export default API;
