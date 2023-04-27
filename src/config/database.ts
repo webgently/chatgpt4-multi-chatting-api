@@ -30,6 +30,7 @@ const MakeAdminAccount = async () => {
       last_name: '',
       email: process.env.ADMIN_EMAIL,
       user_name: process.env.ADMIN_USER_NAME,
+      avatar: '',
       password: await bcrypt.hash(String(process.env.ADMIN_PASSWORD), 10),
       permission: 'admin',
       status: 'accept'
