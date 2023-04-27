@@ -7,7 +7,8 @@ const Schema = mongoose.Schema;
 const BasicSchema = new Schema({
   first_name: {
     type: String,
-    default: ''
+    default: '',
+    require: true
   },
   last_name: {
     type: String,
@@ -22,6 +23,10 @@ const BasicSchema = new Schema({
     type: String,
     default: '',
     require: true
+  },
+  avatar: {
+    type: String,
+    default: ''
   },
   password: {
     type: String,
