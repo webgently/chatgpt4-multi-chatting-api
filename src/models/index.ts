@@ -1,4 +1,5 @@
 import UserSchema from './user';
 import TokenSchema from './token';
+import ChathistorySchema from './chathistory';
 
-export { UserSchema, TokenSchema };
+export { UserSchema, TokenSchema, ChathistorySchema };
