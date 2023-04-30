@@ -11,7 +11,7 @@ import { Trim, emailValidator, isStrongPassword } from '../untils';
 // Normal Auth
 const register = async (req: Request, res: Response) => {
   try {
-    const { first_name, last_name, email, user_name, password, permission }: RegisterObject = req.body;
+    const { first_name, last_name, email, user_name, password, group, permission }: RegisterObject = req.body;
 
     if (
       !(Trim(first_name) && Trim(last_name) && Trim(email) && Trim(user_name) && Trim(password) && Trim(permission))
@@ -28,11 +28,11 @@ const register = async (req: Request, res: Response) => {
     } // Check strong password
 
     const oldUser = await controllers.Auth.find({
-      filter: [{ user_name: Trim(user_name) }, { email: Trim(email.toLowerCase()) }]
+      filter: [{ user_name: Trim(user_name) }, { email: Trim(email) }]
     });
 
     if (oldUser) {
-      if (oldUser.email === Trim(email.toLowerCase())) {
+      if (oldUser.email === Trim(email)) {
         return res.send({ status: false, code: 409, message: 'Email Already Exist.' });
       }
 
@@ -46,9 +46,10 @@ const register = async (req: Request, res: Response) => {
     await controllers.Auth.create({
       first_name,
       last_name,
-      email: Trim(email.toLowerCase()),
+      email: Trim(email),
       user_name,
       password: encryptedPassword,
+      group,
       permission,
       status: 'pending'
     }); // Save user data
@@ -69,7 +70,7 @@ const login = async (req: Request, res: Response) => {
     }
 
     const user = await controllers.Auth.find({
-      filter: [{ email: Trim(email.toLowerCase()) }]
+      filter: [{ email: Trim(email) }]
     });
 
     if (!user) {
@@ -101,10 +102,11 @@ const login = async (req: Request, res: Response) => {
           user_id: user._id,
           first_name: Trim(user.first_name),
           last_name: Trim(user.last_name),
-          email: Trim(email.toLowerCase()),
+          email: Trim(email),
           user_name: Trim(user.user_name),
           avatar: Trim(user.avatar),
-          permission: Trim(user.permission)
+          permission: Trim(user.permission),
+          group: user.group
         },
         String(process.env.TOKEN_KEY),
         {
