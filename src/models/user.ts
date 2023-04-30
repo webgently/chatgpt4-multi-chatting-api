@@ -38,6 +38,11 @@ const BasicSchema = new Schema({
     default: '',
     require: true
   },
+  group: {
+    type: Array,
+    default: [],
+    require: true
+  },
   status: {
     type: String,
     default: '',
