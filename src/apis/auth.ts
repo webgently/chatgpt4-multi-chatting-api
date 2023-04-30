@@ -114,7 +114,7 @@ const login = async (req: Request, res: Response) => {
         }
       ); // Create token
 
-      return res.send({ status: true, code: 200, message: 'User created successfully, please login', token: token });
+      return res.send({ status: true, code: 200, message: 'User logged successfully, please login', token: token });
     } else {
       return res.send({ status: false, code: 400, message: 'Password or Email is not correct!' });
     }
