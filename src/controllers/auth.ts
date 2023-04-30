@@ -2,15 +2,16 @@ import { UserSchema } from '../models';
 
 const Auth = {
   create: async (props: any) => {
-    const { first_name, last_name, email, user_name, password, permission } = props;
+    const { first_name, last_name, email, user_name, password, group, permission } = props;
 
     try {
       const newData = new UserSchema({
         first_name,
         last_name,
-        email: email.toLowerCase().trim(),
+        email,
         user_name,
         password: password,
+        group,
         permission,
         status: 'pending'
       });
