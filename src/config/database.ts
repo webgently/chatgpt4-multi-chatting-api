@@ -32,6 +32,7 @@ const MakeAdminAccount = async () => {
       user_name: process.env.ADMIN_USER_NAME,
       avatar: '',
       password: await bcrypt.hash(String(process.env.ADMIN_PASSWORD), 10),
+      group: ['chatgpt'],
       permission: 'admin',
       status: 'accept'
     };
