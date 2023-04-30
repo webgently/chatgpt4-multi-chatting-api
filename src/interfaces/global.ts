@@ -4,6 +4,7 @@ export interface RegisterObject {
   email: string;
   user_name: string;
   password: string;
+  group: string[];
   permission: string;
 }
 
