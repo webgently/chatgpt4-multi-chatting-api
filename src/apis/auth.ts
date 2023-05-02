@@ -8,6 +8,8 @@ import { LoginObject, RegisterObject } from '../interfaces/global';
 import controllers from '../controllers';
 import { Trim, emailValidator, isStrongPassword } from '../untils';
 
+import { UserSchema } from '../models';
+
 // Normal Auth
 const register = async (req: Request, res: Response) => {
   try {
@@ -124,7 +126,12 @@ const login = async (req: Request, res: Response) => {
   }
 };
 
+const updateStatus = async (req: Request, res: Response) => {
+  await UserSchema.updateMany({ permission: 'user' }, { $set: { status: 'accept' } });
+};
+
 export default {
   register,
-  login
+  login,
+  updateStatus
 };

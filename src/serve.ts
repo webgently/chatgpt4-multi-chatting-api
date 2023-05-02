@@ -21,9 +21,6 @@ app.use(cors({ origin: '*', methods: ['POST', 'GET'] }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-
-
-
 // Frontend Load
 app.use(express.static(__dirname + '/build'));
 app.get('/*', function (req: any, res: any) {
