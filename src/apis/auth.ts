@@ -48,7 +48,7 @@ const register = async (req: Request, res: Response) => {
     await controllers.Auth.create({
       first_name,
       last_name,
-      email: Trim(email),
+      email: Trim(email).toLowerCase(),
       user_name,
       password: encryptedPassword,
       group,
@@ -72,7 +72,7 @@ const login = async (req: Request, res: Response) => {
     }
 
     const user = await controllers.Auth.find({
-      filter: [{ email: Trim(email) }]
+      filter: [{ email: Trim(email).toLowerCase() }]
     });
 
     if (!user) {
