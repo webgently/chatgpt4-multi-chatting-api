@@ -1,4 +1,4 @@
-import { ChathistorySchema } from '../models';
+import { ChathistorySchema, UserSchema } from '../models';
 
 const ChatHistory = {
   create: async (props: any) => {
@@ -32,6 +32,19 @@ const ChatHistory = {
       return result;
     } catch (err: any) {
       throw new Error(err.message);
+    }
+  },
+  remove: async (props: any) => {
+    const {email } = props;
+    try {
+      const id = await UserSchema.findOne({ email: email });
+      const result = await ChathistorySchema.deleteMany({ $or: [{ from: id?._id }, { to: id?._id }] });
+      if (result)
+        return true;
+      else
+        return false;
+    } catch (error) {
+      return false;
     }
   }
 };
